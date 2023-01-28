@@ -1,7 +1,7 @@
 local status, saga = pcall(require, "lspsaga")
 if (not status) then return end
 
-saga.init_lsp_saga({
+saga.setup({
   code_action_lightbulb = {
     enable = false
   },

@@ -6,7 +6,7 @@ null_ls.setup({
       vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
 
       -- format on save
-      vim.cmd("autocmd BufWritePre <buffer> :Prettier")
+      vim.cmd("autocmd BufWritePre <buffer> :lua vim.lsp.buf.formatting()<CR>")
     end
 
     if client.server_capabilities.documentRangeFormattingProvider then

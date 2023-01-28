@@ -19,7 +19,9 @@ treesitter.setup({
         "css",
         "html",
         "rust",
-        "lua"
+        "lua",
+        "cmake",
+        "markdown"
     },
     autotag = {
         enable = true

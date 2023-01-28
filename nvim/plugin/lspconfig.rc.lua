@@ -3,8 +3,6 @@ if (not status) then return end
 
 local protocol = require('vim.lsp.protocol')
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -21,6 +19,11 @@ local on_attach = function(_, bufnr)
   --buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.css", "*.scss" },
+    command = "PrettierAsync"
+  })
 end
 
 protocol.CompletionItemKind = {
@@ -51,7 +54,7 @@ protocol.CompletionItemKind = {
   '', -- TypeParameter
 }
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
@@ -121,7 +124,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     signs = false,
     underline = true,
-    update_in_insert = true,
+    update_in_insert = false,
     virtual_text = { spacing = 4, prefix = "●" },
     severity_sort = true,
   }
@@ -137,7 +140,10 @@ end
 vim.diagnostic.config({
   signs = false,
   underline = true,
-  update_in_insert = true,
+  update_in_insert = false,
   virtual_text = { spacing = 4, prefix = "●" },
   severity_sort = true,
 })
+
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', 'D', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)

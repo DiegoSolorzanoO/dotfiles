@@ -8,7 +8,13 @@ vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
   use('wbthomason/packer.nvim')
+
+  -- Themes
   use('folke/tokyonight.nvim')
+  use {
+    'catppuccin/nvim',
+    as = 'catppuccin'
+  }
 
   -- Statusline
   use('nvim-lualine/lualine.nvim')
@@ -29,8 +35,11 @@ packer.startup(function(use)
 
   -- Formatting
   use('jose-elias-alvarez/null-ls.nvim')
-  use('MunifTanjim/prettier.nvim') -- Prettier plugin for Neovim's built-in LSP client
   use('editorconfig/editorconfig-vim')
+  use {
+    'prettier/vim-prettier',
+    run = 'yarn install --frozen-lockfile --production'
+  }
 
   -- Mason LSP manager
   use('williamboman/mason.nvim')
