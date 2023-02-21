@@ -1,6 +1,9 @@
 local status, nvim_lsp = pcall(require, "lspconfig")
 if (not status) then return end
 
+local has = vim.fn.has
+local is_win = has "win32"
+
 local protocol = require('vim.lsp.protocol')
 
 local on_attach = function(_, bufnr)
@@ -60,17 +63,27 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+local tsserver_cmd = { "typescript-language-server", "--stdio" }
+if is_win then
+  tsserver_cmd = { "typescript-language-server.cmd", "--stdio" }
+end
+
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-  cmd = { "typescript-language-server.cmd", "--stdio" },
+  cmd = tsserver_cmd,
   capabilities = capabilities
 }
+
+local cssls_cmd = { "vscode-css-language-server", "--stdio" }
+if is_win then
+  cssls_cmd = { "vscode-css-language-server.cmd", "--stdio" }
+end
 
 nvim_lsp.cssls.setup {
   on_attach = on_attach,
   filetypes = { "css", "scss", "less" },
-  cmd = { "vscode-css-language-server.cmd", "--stdio" },
+  cmd = cssls_cmd,
   capabilities = capabilities,
   settings = {
     scss = {

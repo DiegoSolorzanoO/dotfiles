@@ -12,6 +12,8 @@ treesitter.setup({
         disable = {},
     },
     ensure_installed = {
+        "c",
+        "help",
         "tsx",
         "toml",
         "json",
@@ -20,6 +22,7 @@ treesitter.setup({
         "html",
         "rust",
         "lua",
+        "vim",
         "cmake",
         "markdown"
     },
