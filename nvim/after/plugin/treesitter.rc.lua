@@ -13,7 +13,6 @@ treesitter.setup({
     },
     ensure_installed = {
         "c",
-        "help",
         "tsx",
         "toml",
         "json",
