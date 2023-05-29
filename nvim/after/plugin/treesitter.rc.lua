@@ -23,7 +23,8 @@ treesitter.setup({
         "lua",
         "vim",
         "cmake",
-        "markdown"
+        "markdown",
+        "markdown_inline"
     },
     autotag = {
         enable = true

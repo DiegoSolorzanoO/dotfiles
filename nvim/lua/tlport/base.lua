@@ -30,7 +30,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
 vim.opt.wildignore:append("*/node_modules/*")
 vim.opt.cmdheight = 1
-vim.g.mapleader = " "
+vim.g.mapleader = ";"
 
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = '*',
