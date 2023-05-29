@@ -14,3 +14,11 @@ With [Chocolatey](https://chocolatey.org/), install `clang` compiler.
 
 choco install llvm
 ```
+
+With [Scoop](https://scoop.sh/), install `lua-language-server`.
+
+```
+// Powershell
+
+scoop installl lua-language-server
+```
